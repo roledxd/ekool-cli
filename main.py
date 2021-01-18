@@ -62,9 +62,13 @@ class EKoolLoop(Cmd):
     def __init__(self):
         # Kui tahame oma konstruktorit kasutada, peame ennem callima ka Cmd classi konstruktorit.
         super(EKoolLoop, self).__init__()
-
-        # Loome eKooliga rääkiva classi instance. Selle kaudu saame võtta näiteks tunniplaani jne.
-        self.ekool = EKoolParser(EMAIL, PASSWORD)
+        try:
+            # Loome eKooliga rääkiva classi instance. Selle kaudu saame võtta näiteks tunniplaani jne.
+            self.ekool = EKoolParser(EMAIL, PASSWORD)
+            self.prompt = self.ekool.person_info['name1']+" "+self.ekool.person_info['name2']+"> "
+        except:
+            print("Unable to sign in, closing...")
+            exit(0)
 
 
     # Command -> 'eKool> v'
@@ -72,6 +76,12 @@ class EKoolLoop(Cmd):
     def do_v(self,feedNumber):
         self.feed_handler(feedNumber=feedNumber)
     
+    # Command -> 'eKool> e'
+    def do_e(self, line):
+        exit(0)
+
+    def do_exit(self, line):
+        exit(0)
 
     # Command -> 'eKool> k'
     # Lühend sõnast 'kodutoo' ning teeb täpselt sama asja, mida 'eKool> kodutoo' command.
