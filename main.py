@@ -65,8 +65,15 @@ class EKoolLoop(Cmd):
 
         # Loome eKooliga rääkiva classi instance. Selle kaudu saame võtta näiteks tunniplaani jne.
         self.ekool = EKoolParser(EMAIL, PASSWORD)
+    
+    # Command -> 'eKool> e'
+    # closing script
+    def do_e(self, line):
+        exit(0)
 
-
+    def do_exit(self, line):
+        exit(0)
+    
     # Command -> 'eKool> v'
     # Lühend sõnast 'voog' ning teeb täpselt sama asja, mida 'eKool> voog' command.
     def do_v(self,feedNumber):
